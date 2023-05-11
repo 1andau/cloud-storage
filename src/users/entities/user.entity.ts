@@ -1,29 +1,20 @@
-import { FileEntity } from "src/files/entities/file.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { FileEntity } from '../../files/entities/file.entity';
 
 @Entity('users')
-
 export class UserEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-@PrimaryGeneratedColumn()
-id: number
+  @Column()
+  email: string;
 
-@Column()
-email: string
+  @Column()
+  password: string;
 
-@Column()
-password: string
+  @Column()
+  fullName: string;
 
-@Column()
-fullname: string
-
-@Column()
-name: string
-
-//у каждого файла есть свой пользователь, 
-@OneToMany(() => FileEntity, file => file.user)
-//files типизируем и говорим что он будет возвращать список файлов FileEntity
-files: FileEntity[];
-
+  @OneToMany(() => FileEntity, (file) => file.user)
+  files: FileEntity[];
 }
